@@ -1,159 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link rel="stylesheet" href="test.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
 </head>
-<body>
-    <main class="main-content">
-        <section class="left-section">
-            <div class="left-content">
-                <div class="profile">
-                    <div class="image">
-                        <img src="avata.jpg" alt="">
-                    </div>
-                    <h2 class="name">Nguyễn Đức Mạnh</h2>
-                    <p class="career">Salesforce Developer</p>
-                </div>
-                <div class="contact-info">
-                    <h3 class="main-title">Contact Info</h3>
-                    <ul>
-                        <li>
-                            <i class="fa fa-phone"></i>
-                            0979377285
-                        </li>
-                        <li>
-                            <i class="fa fa-fax"></i>
-                            manh9121998@gmail.com
-                        </li>
-                        <li>
-                            <i class="fa fa-facebook"></i>
-                            <a href="https://www.facebook.com/ducmanh.nguyen.92123/">https://www.facebook.com/ducmanh.nguyen.92123/</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-instagram"></i>
-                            <a href="https://www.instagram.com/m9121998/">https://www.instagram.com/m9121998/</a>
-                        </li>
-                        <li>
-                            <i class="fa fa-map-marker"></i>
-                            Số 18 Ngách 91/6 Nguyễn Văn Trỗi, Phương Liệt, Thanh Xuân, Hà Nội
-                        </li>
-                    </ul>
-                </div>
-                <div class="skills-section">
-                    <h3 class="main-title">Skills</h3>
-                    <ul>
-                        <li>
-                            <p class="skill-title">Javascript</p>
-                        </li>
-                        <li>
-                            <p class="skill-title">Java</p>
-                        </li>
-                        <li>
-                            <p class="skill-title">Apex</p>
-                        </li>
-                        <li>
-                            <p class="skill-title">Lightning Component</p>
-                        </li>
-                        <li>
-                            <p class="skill-title">html/css</p>
-                        </li>
-                        <li>
-                            <p class="skill-title">Admin</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        <section class="right-section">
-            <div class="right-main-content">
-                <section class="about sect">
-                    <h2 class="right-title">Mục tiêu</h2>
-                    <p class="para">
-                        Mục tiêu ngắn hạn:<br>
-                        + Va chạm nhiều dự án thực tế.<br>
-                        + Nâng cao kỹ năng chuyên sâu về lập trình và các Frameworktrong.<br>
-                        + Học thêm về Salesforce
-                        <br>
-                        <br>
-                        Mục tiêu dài hạn:<br>
-                        + Trở thành Dev salesforce và có thêm nhiều chứng chỉ<br>
-                        + Thăng tiến trong công việc.
-                    </p>
-                </section>
 
-                <section class="experince sect">
-                    <h2 class="right-title">Kinh nghiệm</h2>
-                    <div class="timeline">
-                        <div class="left-tl-content">
-                            <h5 class="tl-title">CẮT GIAO DIỆN TỪ PSD SANG HTML CSS</h5>
-                            <p class="para">2019 - 2020</p>
-                        </div>
-                        <div class="right-tl-content">
-                            <div class="tl-content">
-                                <h5 class="tl-title-2">Fresher Font-end</h5>
-                                <p class="para">
-                                    - Viết các trang web từ các mẫu đã có sẵn (PSD và AI)<br>
-                                    - Kỹ năng sử dụng Gitlab, Github, Trello
-                                </p>
-                            </div>
-                        </div>
+<body>
+    <div>
+        <h1 class="title">Web to Lead</h1>
+        <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST">
+
+            <input type=hidden name="oid" value="00D6D0000000WqL">
+            <input type=hidden name="retURL" value="https://b2buat-vietnamairlines.cs73.force.com/s/public-landing">
+
+            <!--  ----------------------------------------------------------------------  -->
+            <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+            <!--  these lines if you wish to test in debug mode.                          -->
+            <!--  <input type="hidden" name="debug" value=1>                              -->
+            <!--  <input type="hidden" name="debugEmail" value="ndmanh@gimasys.com">      -->
+            <!--  ----------------------------------------------------------------------  -->
+
+            <div class="formLead">
+                <div class="section">
+                    <div class="item">
+                        <p for="first_name">First Name</p>
+                        <input id="first_name" maxlength="40" name="first_name" size="20" type="text" required/><br>
                     </div>
-                    <div class="timeline">
-                        <div class="left-tl-content">
-                            <h5 class="tl-title">Gimasys</h5>
-                            <p class="para">2020 - 2022</p>
-                        </div>
-                        <div class="right-tl-content">
-                            <div class="tl-content">
-                                <h5 class="tl-title-2">Salesforce Developer/h5>
-                                <p class="para">
-                                    - Học về Apex và lightning component<br>
-                                    - Thực hiện các công việc liên quan đến Community Cloud<br>
-                                    - Tham gia dự án B2B Portal
-                                </p>
-                            </div>
-                        </div>
+                    <div class="item">
+                        <p for="last_name">Last Name</p>
+                        <input id="last_name" maxlength="80" name="last_name" size="20" type="text" required/><br>
                     </div>
-                </section>
-                <section class="education sect">
-                    <h2 class="right-title">Học Vấn</h2>
-                    <div class="timeline">
-                        <div class="left-tl-content">
-                            <h5 class="tl-title">Trường THPT Quang Trung - Đống Đa</h5>
-                            <p class="para">2013 - 2016</p>
-                        </div>
-                        <div class="right-tl-content">
-                            <div class="tl-content">
-                                <h5 class="tl-title-2">Thông tin</h5>
-                                <p class="para">
-                                </p>
-                            </div>
-                        </div>
+
+                </div>
+
+                <div class="section">
+
+                    <div class="item">
+                        <p for="email">Email</p>
+                        <input id="email" maxlength="80" name="email" size="20" type="text" required/><br>
                     </div>
-                    <div class="timeline">
-                        <div class="left-tl-content">
-                            <h5 class="tl-title">Trường Đại Học Thủy Lợi</h5>
-                            <p class="para">2017 - 2020</p>
-                        </div>
-                        <div class="right-tl-content">
-                            <div class="tl-content">
-                                <h5 class="tl-title-2">Thông tin</h5>
-                                <p class="para">
-                                    - Chuyên nghành: Hệ thống thông tin
-                                </p>
-                            </div>
-                        </div>
+                    <div class="item">
+                        <p for="phone">Phone</p>
+                        <input id="phone" maxlength="40" name="phone" size="20" type="text" required/><br>
                     </div>
-                </section>
+                </div>
+
+                <div class="section">
+                    <div class="item">
+                        <p for="company">Company</p>
+                        <input id="company" maxlength="40" name="company" size="20" type="text" required/><br>
+                    </div>
+                    <div class="item">
+                        <p for="title">Title</p>
+                        <input id="title" maxlength="40" name="title" size="20" type="text" required/><br>
+                    </div>
+                </div>
+                <input class="submit-btn" type="submit" name="submit">
             </div>
-        </section>
-    </main>
+        </form>
+    </div>
 </body>
+
 </html>
