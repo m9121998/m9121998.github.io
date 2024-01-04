@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <META HTTP-EQUIV="Content-type" CONTENT="text/html; charset=UTF-8">
+</head>
+
+<body>
+    <div>
+        <h1 class="title">Web to Lead</h1>
+        <form action="https://test.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D0k0000001sPf" method="POST">
+
+            <input type=hidden name="oid" value="00D0k0000001sPf">
+            <input type=hidden name="retURL" value="file:///C:/Users/MyPC/Desktop/success.html">
+            <!--  ----------------------------------------------------------------------  -->
+            <!--  NOTE: These fields are optional debugging elements. Please uncomment    -->
+            <!--  these lines if you wish to test in debug mode.                          -->
+            <!--  <input type="hidden" name="debug" value=1>                              -->
+            <!--  <input type="hidden" name="debugEmail" value="ndmanh@gimasys.com">      -->
+            <!--  ----------------------------------------------------------------------  -->
+
+            <div class="formLead">
+                <div class="section">
+                    <div class="item">
+                        <p for="first_name">First Name</p>
+                        <input id="first_name" maxlength="40" name="first_name" size="20" type="text" required/><br>
+                    </div>
+                    <div class="item">
+                        <p for="last_name">Last Name</p>
+                        <input id="last_name" maxlength="80" name="last_name" size="20" type="text" required/><br>
+                    </div>
+
+                </div>
+
+                <div class="section">
+
+                    <div class="item">
+                        <p for="email">Email</p>
+                        <input id="email" maxlength="80" name="email" size="20" type="text" required/><br>
+                    </div>
+                    <div class="item">
+                        <p for="phone">Mobile Phone</p>
+                        <input id="phone" maxlength="40" name="MobilePhone" size="20" type="text" required/><br>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <div class="item">
+                        <p for="company">Company</p>
+                        <input id="company" maxlength="40" name="company" size="20" type="text" required/><br>
+                    </div>
+                </div>
+                <input class="submit-btn" type="submit" name="submit">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
