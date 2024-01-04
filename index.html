@@ -44,11 +44,11 @@
 				</input>				
 			</form>
 			<div class="social-login">
-				<h3>log in via</h3>
+				<h3>More information</h3>
 				<div class="social-icons">
-					<a href="#" class="social-login__icon fab fa-instagram"></a>
-					<a href="#" class="social-login__icon fab fa-facebook"></a>
-					<a href="#" class="social-login__icon fab fa-twitter"></a>
+					<a id="yourLink" href="#" class="social-login__icon fab fa-instagram"></a>
+					<a id="yourLink3" href="#" class="social-login__icon fab fa-facebook"></a>
+					<a id="yourLink2" href="#" class="social-login__icon fab fa-twitter"></a>
 				</div>
 			</div>
 		</div>
@@ -64,6 +64,23 @@
 
 
 <!-- partial -->
-  
+<script>
+    function onLoad(){
+       var urlLink = "http://www.instagram.com/ngmanh998";
+       var urlLink2 = "http://www.twitter.com/";
+       var urlLink3 = "https://www.facebook.com/ducmanh.nguyen.92123/";
+       var ua = navigator.userAgent.toLowerCase();
+       var isAndroid = ua.indexOf("android") > -1;
+       if(isAndroid) {
+          urlLink = "instagram://user?username=ngmanh998";
+          urlLink2 = "twitter://user?username=";
+          urlLink3 = "facebook://user?username=ducmanh.nguyen.92123";
+       }
+       document.getElementById('yourLink').setAttribute('href', urlLink);
+       document.getElementById('yourLink2').setAttribute('href', urlLink2);
+       document.getElementById('yourLink3').setAttribute('href', urlLink3);
+    }
+    window.onload = onLoad;
+    </script>
 </body>
 </html>
