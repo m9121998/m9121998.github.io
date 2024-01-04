@@ -37,7 +37,7 @@ body {
 }
 
 .item p {
-    width: 100px;
+    width: 100%;
     font-weight: bold;
 }
 
