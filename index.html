@@ -859,6 +859,44 @@
       transform: translateY(-1px);
     }
 
+    /* Mobile: ảnh nhô lên (-52%) đè chữ phụ & nút bản đồ (do thứ tự vẽ DOM) — chừa khoảng + z-index + giảm nhô */
+    @media (max-width: 699px) {
+      .events-showcase__sub {
+        margin-bottom: clamp(2rem, 6vw, 2.75rem);
+        position: relative;
+        z-index: 2;
+      }
+
+      .events-layout {
+        position: relative;
+        z-index: 1;
+        padding-top: clamp(2.25rem, 9vw, 3.5rem);
+        gap: 1.5rem 1rem;
+      }
+
+      /* Thẻ “Lễ Thành Hôn” đứng sau nút bản đồ trong DOM → ảnh vẽ đè nút nếu không tách khoảng / z-index */
+      .events-layout > .event-card:nth-child(3) {
+        position: relative;
+        z-index: 0;
+        margin-top: clamp(2.5rem, 11vw, 4rem);
+      }
+
+      .events-map-cta {
+        position: relative;
+        z-index: 3;
+      }
+
+      .event-card__photo {
+        transform: translate(-50%, -38%);
+        max-height: 100px;
+        width: min(52%, 180px);
+      }
+
+      .event-card {
+        padding-top: 4rem;
+      }
+    }
+
     /* --- Lịch cưới + đếm ngược --- */
     .calendar-section {
       max-width: 500px;
@@ -1334,6 +1372,59 @@
       color: var(--text);
       font-weight: 600;
     }
+
+    /* Nhạc nền YouTube (cùng video với link YouTube Music) */
+    .yt-bg-music-host {
+      position: fixed;
+      width: 1px;
+      height: 1px;
+      left: -9999px;
+      top: 0;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    .music-float-btn {
+      position: fixed;
+      z-index: 9998;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      width: 3rem;
+      height: 3rem;
+      border-radius: 999px;
+      border: none;
+      background: var(--accent);
+      color: #fff;
+      font-size: 1.15rem;
+      line-height: 1;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(139, 90, 90, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease), transform 0.2s var(--ease);
+    }
+
+    body:not(.invite-pending) .music-float-btn {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .music-float-btn:hover {
+      transform: scale(1.06);
+    }
+
+    .music-float-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .music-float-btn--off {
+      opacity: 0.72;
+    }
   </style>
 </head>
 <body class="invite-pending">
@@ -1632,6 +1723,21 @@
 
   </main>
 
+  <div class="yt-bg-music-host" aria-hidden="true">
+    <div id="yt-bg-music"></div>
+  </div>
+  <button
+    type="button"
+    class="music-float-btn"
+    id="music-float-btn"
+    hidden
+    aria-pressed="true"
+    aria-label="Tạm dừng nhạc nền"
+    title="Nhạc nền"
+  >
+    ♪
+  </button>
+
   <footer class="footer-note">
     <p>
       <strong>Nguyễn Đức Mạnh &amp; Lê Hoàng Kim Ngân</strong> — thiệp gốc:
@@ -1645,10 +1751,122 @@
       var btn = document.getElementById("btn-open-invite");
       var openDuration = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 80 : 1100;
 
+      /* Nhạc nền: video YouTube (ID trùng với music.youtube.com/watch?v=...) */
+      var YT_VIDEO_ID = "aMlx7kKeQXY";
+      var bgMusicPlayer = null;
+      var bgMusicWantsPlay = false;
+      var musicBtn = document.getElementById("music-float-btn");
+
+      function initBgMusicPlayer() {
+        if (typeof YT === "undefined" || !YT.Player) {
+          return;
+        }
+        if (bgMusicPlayer) {
+          return;
+        }
+        var host = document.getElementById("yt-bg-music");
+        if (!host) {
+          return;
+        }
+        bgMusicPlayer = new YT.Player("yt-bg-music", {
+          height: "1",
+          width: "1",
+          videoId: YT_VIDEO_ID,
+          playerVars: {
+            autoplay: 0,
+            loop: 1,
+            playlist: YT_VIDEO_ID,
+            controls: 0,
+            modestbranding: 1,
+            playsinline: 1,
+            rel: 0,
+          },
+          events: {
+            onReady: function () {
+              if (bgMusicWantsPlay) {
+                try {
+                  bgMusicPlayer.unMute();
+                  bgMusicPlayer.playVideo();
+                } catch (e) {}
+              }
+              syncMusicButton();
+            },
+            onStateChange: function () {
+              syncMusicButton();
+            },
+          },
+        });
+      }
+
+      function tryStartBgMusic() {
+        bgMusicWantsPlay = true;
+        if (musicBtn) {
+          musicBtn.hidden = false;
+        }
+        if (bgMusicPlayer && typeof bgMusicPlayer.playVideo === "function") {
+          try {
+            bgMusicPlayer.unMute();
+            bgMusicPlayer.playVideo();
+          } catch (e) {}
+        }
+      }
+
+      function syncMusicButton() {
+        if (!musicBtn || !bgMusicPlayer || typeof bgMusicPlayer.getPlayerState !== "function") {
+          return;
+        }
+        var st = bgMusicPlayer.getPlayerState();
+        var playing = st === YT.PlayerState.PLAYING;
+        musicBtn.setAttribute("aria-pressed", playing ? "true" : "false");
+        musicBtn.setAttribute("aria-label", playing ? "Tạm dừng nhạc nền" : "Bật nhạc nền");
+        musicBtn.classList.toggle("music-float-btn--off", !playing);
+      }
+
+      if (musicBtn) {
+        musicBtn.addEventListener("click", function () {
+          if (!bgMusicPlayer || typeof bgMusicPlayer.getPlayerState !== "function") {
+            return;
+          }
+          var st = bgMusicPlayer.getPlayerState();
+          if (st === YT.PlayerState.PLAYING) {
+            bgMusicPlayer.pauseVideo();
+          } else {
+            bgMusicWantsPlay = true;
+            try {
+              bgMusicPlayer.unMute();
+              bgMusicPlayer.playVideo();
+            } catch (e) {}
+          }
+          syncMusicButton();
+        });
+      }
+
+      window.onYouTubeIframeAPIReady = function () {
+        initBgMusicPlayer();
+        if (bgMusicWantsPlay) {
+          tryStartBgMusic();
+        }
+      };
+
+      if (!window.YT) {
+        var tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        tag.async = true;
+        var first = document.getElementsByTagName("script")[0];
+        if (first && first.parentNode) {
+          first.parentNode.insertBefore(tag, first);
+        } else {
+          document.head.appendChild(tag);
+        }
+      } else if (window.YT && window.YT.Player) {
+        window.onYouTubeIframeAPIReady();
+      }
+
       function openInvite() {
         if (!gate || gate.classList.contains("invite-gate--done")) {
           return;
         }
+        tryStartBgMusic();
         gate.classList.add("invite-gate--opening");
         btn.disabled = true;
         window.setTimeout(function () {
