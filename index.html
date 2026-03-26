@@ -123,7 +123,7 @@
       font-family: var(--font-script-alt);
       font-size: 1.35rem;
       font-weight: 600;
-      margin: 0 0 2rem;
+      margin: 0 0 5rem;
       color: var(--text);
       line-height: 1.35;
     }
@@ -285,6 +285,12 @@
         linear-gradient(to bottom, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.25) 50%, rgba(0, 0, 0, 0.45) 100%),
         url("Resource/banner.jpg") center center / cover no-repeat;
       z-index: 0;
+    }
+
+    @media (max-width: 768px) {
+      .hero__bg {
+        background-position: 36% center;
+      }
     }
 
     .hero__bokeh {
@@ -545,6 +551,27 @@
       aspect-ratio: 3 / 4;
     }
 
+    .couple__photo--groom,
+    .couple__photo--bride {
+      transition: transform 0.9s var(--ease), opacity 0.9s var(--ease);
+      will-change: transform, opacity;
+    }
+
+    .couple__photo--groom {
+      transform: translateX(-46px);
+      opacity: 0;
+    }
+
+    .couple__photo--bride {
+      transform: translateX(46px);
+      opacity: 0;
+    }
+
+    .couple__photo.is-inview {
+      transform: translateX(0);
+      opacity: 1;
+    }
+
     .couple__photo img {
       width: 100%;
       height: 100%;
@@ -803,6 +830,19 @@
       display: block;
     }
 
+    /* Sửa 10: kéo ảnh event lên để không che mặt */
+    @media (min-width: 700px) {
+      .event-card__photo--up {
+        transform: translate(-50%, -58%);
+        max-height: 135px;
+        will-change: transform;
+      }
+
+      .event-card__photo--up img {
+        object-position: 50% 26%;
+      }
+    }
+
     .event-card__name {
       font-family: var(--font-serif);
       font-size: 1.05rem;
@@ -826,6 +866,15 @@
       font-size: 0.78rem;
       line-height: 1.5;
       color: rgba(255, 255, 255, 0.95);
+    }
+
+    .event-card__row span {
+      --event-row-width: 31ch;
+      display: block;
+      flex: 0 0 var(--event-row-width);
+      width: var(--event-row-width);
+      max-width: var(--event-row-width);
+      min-height: calc(1.5em * 2);
     }
 
     .event-card__row svg {
@@ -892,8 +941,135 @@
         width: min(52%, 180px);
       }
 
+      /* Trên mobile: ảnh event riêng cho 2 sự kiện để tránh mất phần mặt */
+      .event-card__photo--up {
+        transform: translate(-50%, -42%);
+        max-height: 112px;
+      }
+
+      .event-card__photo--up img {
+        object-position: 50% 28%;
+      }
+
       .event-card {
         padding-top: 4rem;
+      }
+
+      .event-card__row span {
+        --event-row-width: min(100%, 34ch);
+      }
+    }
+
+    /* --- Câu chuyện tình yêu --- */
+    .love-story {
+      max-width: 900px;
+      margin: 0.75rem auto 0;
+      padding: 2.3rem 1.25rem 0.75rem;
+      text-align: center;
+      background: #fff8f8;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .love-story__title {
+      margin: 0 0 0.5rem;
+      font-family: var(--font-script-alt);
+      font-size: clamp(2rem, 5.2vw, 3rem);
+      font-weight: 600;
+      color: #d46b76;
+    }
+
+    .love-story__sub {
+      margin: 0 0 1.8rem;
+      color: #585858;
+      font-size: var(--text-md);
+    }
+
+    .love-story__list {
+      display: grid;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .love-story__item {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .love-story__card {
+      background: #fff;
+      border-radius: 10px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      padding: 1rem 1rem 0.9rem;
+      text-align: center;
+    }
+
+    .love-story__card h3 {
+      margin: 0 0 0.35rem;
+      font-family: var(--font-script-alt);
+      font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+      color: #e2676f;
+    }
+
+    .love-story__date {
+      margin: 0 0 0.45rem;
+      font-size: var(--text-sm);
+      color: #5c5c5c;
+    }
+
+    .love-story__desc {
+      margin: 0;
+      color: #4f4f4f;
+      line-height: 1.6;
+      font-size: var(--text-sm);
+    }
+
+    .love-story__photo {
+      width: clamp(120px, 22vw, 170px);
+      height: clamp(120px, 22vw, 170px);
+      border-radius: 999px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+      border: 4px solid #fff;
+    }
+
+    .love-story__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .love-story__item:nth-child(even) .love-story__card {
+      grid-column: 3;
+    }
+
+    .love-story__item:nth-child(even) .love-story__photo {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    @media (max-width: 760px) {
+      .love-story {
+        padding: 2rem 1rem 0.5rem;
+      }
+
+      .love-story__item {
+        grid-template-columns: 1fr;
+        gap: 0.7rem;
+      }
+
+      .love-story__photo {
+        margin: 0 auto;
+      }
+
+      .love-story__item:nth-child(even) .love-story__card,
+      .love-story__item:nth-child(even) .love-story__photo {
+        grid-column: auto;
       }
     }
 
@@ -1066,7 +1242,7 @@
     }
 
     .gallery-section {
-      max-width: 980px;
+      max-width: 100%;
       width: 100%;
       margin: 0.75rem auto 0;
       padding: 2.15rem 1rem 2rem;
@@ -1090,6 +1266,82 @@
       text-align: center;
       color: #3a3a3a;
       margin: 0 0 1.5rem;
+    }
+
+    /* --- Gallery mới (Sửa 9): lưới đều kích cỡ + khung nhỏ --- */
+    .gallery-frame {
+      max-width: 80vw;
+      width: 100%;
+      margin: 0 auto;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      background: rgba(255, 255, 255, 0.6);
+      content-visibility: auto;
+      contain-intrinsic-size: 520px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 1024px) {
+      .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .gallery-tile {
+      border-radius: 10px;
+      overflow: hidden;
+      background: #e8e4df;
+      aspect-ratio: 3 / 4; /* gần giống ảnh chân dung để gương mặt rõ hơn */
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+      content-visibility: auto;
+      contain-intrinsic-size: 220px 293px;
+      contain: layout paint;
+    }
+
+    .gallery-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 24%;
+      cursor: pointer;
+      display: block;
+      background: #e8e4df;
+    }
+
+    .gallery-tile__img--pending {
+      opacity: 0.92;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .gallery-tile img {
+        transition: transform 0.22s var(--ease);
+      }
+
+      .gallery-tile:hover img {
+        transform: scale(1.02);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .gallery-frame {
+        padding: 10px;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /*
@@ -1425,6 +1677,50 @@
     .music-float-btn--off {
       opacity: 0.72;
     }
+
+    /* --- Gallery lightbox --- */
+    .gallery-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.2rem;
+      background: rgba(0, 0, 0, 0.84);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .gallery-lightbox.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .gallery-lightbox__img {
+      width: auto;
+      max-width: min(96vw, 1180px);
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
+    }
+
+    .gallery-lightbox__close {
+      position: absolute;
+      top: 0.9rem;
+      right: 0.9rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      font-size: 1.35rem;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body class="invite-pending">
@@ -1489,10 +1785,10 @@
         </svg>
         <h2 id="couple-heading" class="couple__heading">Chú Rể &amp; Cô Dâu</h2>
         <div class="couple__photos">
-          <figure class="couple__photo">
+          <figure class="couple__photo couple__photo--groom">
             <img src="Resource/CR.jpg" alt="Chú rể Nguyễn Đức Mạnh" width="400" height="533" loading="lazy" />
           </figure>
-          <figure class="couple__photo">
+          <figure class="couple__photo couple__photo--bride">
             <img src="Resource/CD.jpg" alt="Cô dâu Lê Hoàng Kim Ngân" width="400" height="533" loading="lazy" />
           </figure>
         </div>
@@ -1526,26 +1822,26 @@
         <path d="M7 14h2M11 14h2M15 14h2M7 17h2M11 17h2" stroke-linecap="round" />
       </svg>
       <h2 id="event-heading" class="events-showcase__title">SỰ KIỆN CƯỚI</h2>
-      <p class="events-showcase__sub">Rất Hân hạnh được đón tiếp mọi người!</p>
+      <p class="events-showcase__sub">Rất hân hạnh được đón tiếp mọi người!</p>
       <div class="events-layout">
         <article class="event-card">
-          <div class="event-card__photo">
-            <img src="Resource/z7640348059289_322b54e3155dfc63a5cdfbf6dc7a30fa.jpg" alt="" width="200" height="150" loading="lazy" />
+          <div class="event-card__photo event-card__photo--up">
+            <img src="Resource/IMG_6727.jpg" alt="" width="200" height="150" loading="lazy" />
           </div>
-          <h3 class="event-card__name">Lễ Vu Quy</h3>
-          <div class="event-card__row">
+          <h3 class="event-card__name">Lễ Ăn Hỏi</h3>
+          <div class="event-card__row event-card__row--time">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <circle cx="12" cy="12" r="9" />
               <path d="M12 7v5l3 2" stroke-linecap="round" />
             </svg>
-            <span>10 giờ 00 phút, Thứ 2, ngày 06 - 04 - 2026<br />(Âm lịch: 19/02 năm Bính Ngọ)</span>
+            <span>07 giờ 00 phút, Thứ 2, ngày 06 - 04 - 2026<br />(Âm lịch: 19/02 năm Bính Ngọ)</span>
           </div>
-          <div class="event-card__row">
+          <div class="event-card__row event-card__row--address">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M12 21s7-4.5 7-10a7 7 0 1 0-14 0c0 5.5 7 10 7 10z" stroke-linecap="round" />
               <circle cx="12" cy="11" r="2.5" fill="currentColor" stroke="none" />
             </svg>
-            <span>18, Ngách 91/6, Ngõ 91 Nguyễn Văn Trỗi, Phương Liệt, Hà Nội</span>
+            <span>555, Xã Vân Du, tỉnh Thanh Hoá</span>
           </div>
         </article>
         <div class="events-map-cta">
@@ -1558,18 +1854,18 @@
           </button>
         </div>
         <article class="event-card">
-          <div class="event-card__photo">
-            <img src="Resource/z7640347084327_a72d206498d141a4cbf187e7280a29df.jpg" alt="" width="200" height="150" loading="lazy" />
+          <div class="event-card__photo event-card__photo--up">
+            <img src="Resource/IMG_8321 phong.jpg" alt="" width="200" height="150" loading="lazy" />
           </div>
           <h3 class="event-card__name">Lễ Thành Hôn</h3>
-          <div class="event-card__row">
+          <div class="event-card__row event-card__row--time">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <circle cx="12" cy="12" r="9" />
               <path d="M12 7v5l3 2" stroke-linecap="round" />
             </svg>
             <span>11 giờ 30 phút, Thứ 2, ngày 06 - 04 - 2025<br />(Âm lịch: 19/02 năm Bính Ngọ)</span>
           </div>
-          <div class="event-card__row">
+          <div class="event-card__row event-card__row--address">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
               <path d="M12 21s7-4.5 7-10a7 7 0 1 0-14 0c0 5.5 7 10 7 10z" stroke-linecap="round" />
               <circle cx="12" cy="11" r="2.5" fill="currentColor" stroke="none" />
@@ -1631,92 +1927,56 @@
         <path d="M28 8v24M20 18l8 6 8-6" opacity="0.7" />
       </svg>
       <h2 id="gallery-heading" class="gallery-section__title">BỘ SƯU TẬP ẢNH CƯỚI</h2>
-      <div class="gallery-mosaic" aria-label="Ảnh nổi bật">
-        <div class="gallery-mosaic__cell gallery-mosaic__cell--lt" style="--gallery-op: 50% 30%;">
-          <img src="Resource/z7640347102856_db81c1a0da98521e5e2897d360f4e476.jpg" alt="Ảnh cưới" width="1698" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-mosaic__cell gallery-mosaic__cell--l1" style="--gallery-op: 50% 24%;">
-          <img src="Resource/z7640347215304_72d1effcd9e16805e7e93c85826aa547.jpg" alt="Ảnh cưới" width="1698" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-mosaic__cell gallery-mosaic__cell--l2" style="--gallery-op: 52% 24%;">
-          <img src="Resource/z7640347287686_f5193e1e7248f40d1c4add2c10533e1a.jpg" alt="Ảnh cưới" width="1698" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-mosaic__cell gallery-mosaic__cell--lb" style="--gallery-op: 50% 20%;">
-          <img src="Resource/z7640347318068_ac6a83147cc8ee590e6cb721c2e07be1.jpg" alt="Ảnh cưới" width="1708" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-mosaic__cell gallery-mosaic__cell--mt" style="--gallery-op: 50% 22%;">
-          <img src="Resource/z7640347084327_a72d206498d141a4cbf187e7280a29df.jpg" alt="Ảnh cưới" width="1707" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-mosaic__cell gallery-mosaic__cell--hero" style="--gallery-op: 50% 20%;">
-          <img src="Resource/BST1.jpg" alt="Ảnh cưới" width="1708" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-mosaic__cell gallery-mosaic__cell--mb" style="--gallery-op: 48% 32%;">
-          <img src="Resource/z7640347352868_e5beff087f893ba44b140a3687672709.jpg" alt="Ảnh cưới" width="1698" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-mosaic__cell gallery-mosaic__cell--rt" style="--gallery-op: 50% 26%;">
-          <img src="Resource/z7640347185521_d2ef90c93f64cfdd9bfd7906ca0d4fd6.jpg" alt="Ảnh cưới" width="1706" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-mosaic__cell gallery-mosaic__cell--rm" style="--gallery-op: 50% 24%;">
-          <img src="Resource/z7640347381222_7d39c36e68054db35daff4d1e66c5c7c.jpg" alt="Ảnh cưới" width="1699" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-mosaic__cell gallery-mosaic__cell--rb" style="--gallery-op: 49% 22%;">
-          <img src="Resource/z7640347417389_6bb8b9781bfce15db241c3a327be6aa9.jpg" alt="Ảnh cưới" width="1707" height="2560" loading="lazy" />
-        </div>
-      </div>
-      <div class="gallery-section__more gallery-masonry" aria-label="Thêm ảnh cưới">
-        <div class="gallery-masonry__item gallery-masonry__item--sz6" style="--gallery-op: 50% 20%;">
-          <img src="Resource/z7640347448407_0c124b0b81b8b92dec4c9f117edee66c.jpg" alt="Ảnh cưới" width="1697" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz4" style="--gallery-op: 48% 26%;">
-          <img src="Resource/z7640347480251_cabc7da61de921d3506fd3e28944b939.jpg" alt="Ảnh cưới" width="1697" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz5" style="--gallery-op: 52% 22%;">
-          <img src="Resource/z7640347525567_2dfb7076a0316a3bd7a9b77f76f24bdd.jpg" alt="Ảnh cưới" width="1707" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz8" style="--gallery-op: 50% 30%;">
-          <img src="Resource/z7640347542282_8da9de42e1e4e18a1873f4389111adc6.jpg" alt="Ảnh cưới" width="1698" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz2" style="--gallery-op: 51% 18%;">
-          <img src="Resource/z7640347593952_a313f7630e0e8952173ad1168e12bc1f.jpg" alt="Ảnh cưới" width="1698" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz5" style="--gallery-op: 49% 24%;">
-          <img src="Resource/z7640347629572_494dcb5c9fc2f0a8f524499bc935c0cf.jpg" alt="Ảnh cưới" width="1707" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz3" style="--gallery-op: 50% 28%;">
-          <img src="Resource/z7640347663144_546e5497f52547fb41030ceeef5a04ce.jpg" alt="Ảnh cưới" width="1696" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz1" style="--gallery-op: 50% 19%;">
-          <img src="Resource/z7640347699848_c5f8fb7f9e43705fec4253c536bb7805.jpg" alt="Ảnh cưới" width="1699" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz8" style="--gallery-op: 53% 27%;">
-          <img src="Resource/z7640347735533_4bb6419cb12011ef3d22572e59d28458.jpg" alt="Ảnh cưới" width="1706" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz2" style="--gallery-op: 47% 21%;">
-          <img src="Resource/z7640347807598_66defc5d3aad9706b3c1a35695809189.jpg" alt="Ảnh cưới" width="1697" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz9" style="--gallery-op: 50% 22%;">
-          <img src="Resource/z7640347854455_a3d451209ef5e6a53f984b39bed951f2.jpg" alt="Ảnh cưới" width="1706" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz3" style="--gallery-op: 51% 31%;">
-          <img src="Resource/z7640347904287_e5f828832bcfed72eb6d5a9478a23bc7.jpg" alt="Ảnh cưới" width="1698" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz4" style="--gallery-op: 50% 25%;">
-          <img src="Resource/z7640347940601_15ca75dbd9b25852b52908b85e571074.jpg" alt="Ảnh cưới" width="1697" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz8" style="--gallery-op: 48% 29%;">
-          <img src="Resource/z7640347980015_7a9248ef9cc02e20c8672a5ef2f647e7.jpg" alt="Ảnh cưới" width="1707" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz6" style="--gallery-op: 52% 20%;">
-          <img src="Resource/z7640348006590_afa8496a676095a15c779de8a4cd91a2.jpg" alt="Ảnh cưới" width="1698" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz4" style="--gallery-op: 49% 23%;">
-          <img src="Resource/z7640348059289_322b54e3155dfc63a5cdfbf6dc7a30fa.jpg" alt="Ảnh cưới" width="1698" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz1" style="--gallery-op: 50% 18%;">
-          <img src="Resource/z7645928952683_4302ffc93c266b1aa2213c55474d9b95.jpg" alt="Ảnh cưới" width="1699" height="2560" loading="lazy" />
-        </div>
-        <div class="gallery-masonry__item gallery-masonry__item--sz5" style="--gallery-op: 51% 26%;">
-          <img src="Resource/z7645930524968_6d331ce25ce20829917f9d12497b35fb.jpg" alt="Ảnh cưới" width="1707" height="2560" loading="lazy" />
+      <div class="gallery-frame" aria-label="Khung ảnh cưới">
+        <div class="gallery-grid" aria-label="Danh sách ảnh cưới">
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_6417.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_6448.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_6523.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_6552.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_6607.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_7485.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_7505.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_7699.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_7860.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_8071%20phong.jpg" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_8207%20phong.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_8228.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_8383.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_8418.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_8452.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
+          <div class="gallery-tile">
+            <img class="gallery-tile__img gallery-tile__img--pending" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="Resource/IMG_8492.JPG" alt="Ảnh cưới" width="1200" height="1600" decoding="async" />
+          </div>
         </div>
       </div>
     </section>
@@ -1744,6 +2004,11 @@
       <a href="" rel="noopener noreferrer"></a>
     </p>
   </footer>
+
+  <div class="gallery-lightbox" id="gallery-lightbox" aria-hidden="true">
+    <button type="button" class="gallery-lightbox__close" id="gallery-lightbox-close" aria-label="Đóng ảnh">×</button>
+    <img class="gallery-lightbox__img" id="gallery-lightbox-img" src="" alt="Ảnh cưới xem toàn màn hình" />
+  </div>
 
   <script>
     (function () {
@@ -2000,17 +2265,154 @@
           obs.observe(el);
         });
       }
+
+      /* Ảnh cô dâu/chú rể trượt vào khi cuộn đến */
+      var couplePhotos = document.querySelectorAll(".couple__photo--groom, .couple__photo--bride");
+      if (!("IntersectionObserver" in window)) {
+        couplePhotos.forEach(function (el) {
+          el.classList.add("is-inview");
+        });
+      } else {
+        var coupleObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-inview");
+                coupleObs.unobserve(entry.target);
+              }
+            });
+          },
+          { root: null, threshold: 0.3 }
+        );
+        couplePhotos.forEach(function (el) {
+          coupleObs.observe(el);
+        });
+      }
+
+      /* Bấm ảnh gallery để xem full + tải ảnh theo hàng (giảm giật khi scroll) */
+      var lightbox = document.getElementById("gallery-lightbox");
+      var lightboxImg = document.getElementById("gallery-lightbox-img");
+      var lightboxClose = document.getElementById("gallery-lightbox-close");
+      var galleryImages = document.querySelectorAll(".gallery-section .gallery-tile__img");
+
+      var GALLERY_LOAD_CONCURRENCY = 2;
+      var galleryLoadQueue = [];
+      var galleryLoadingCount = 0;
+
+      function galleryImgUrl(img) {
+        var ds = img.getAttribute("data-src");
+        if (ds) {
+          return ds;
+        }
+        var u = img.currentSrc || img.src;
+        if (u.indexOf("data:image/gif;base64,") === 0) {
+          return "";
+        }
+        return u;
+      }
+
+      function galleryPumpLoad() {
+        while (galleryLoadingCount < GALLERY_LOAD_CONCURRENCY && galleryLoadQueue.length) {
+          var job = galleryLoadQueue.shift();
+          var img = job && job.img;
+          var url = job && job.url;
+          if (!img || !url) {
+            continue;
+          }
+          galleryLoadingCount++;
+          function finish() {
+            galleryLoadingCount--;
+            img.classList.remove("gallery-tile__img--pending");
+            img.classList.add("gallery-tile__img--ready");
+            galleryPumpLoad();
+          }
+          img.addEventListener("load", finish, { once: true });
+          img.addEventListener("error", finish, { once: true });
+          img.setAttribute("fetchpriority", "low");
+          img.setAttribute("decoding", "async");
+          img.removeAttribute("data-src");
+          img.src = url;
+        }
+      }
+
+      function galleryEnqueue(img) {
+        var url = img.getAttribute("data-src");
+        if (!url || img.dataset.galleryQueued === "1") {
+          return;
+        }
+        img.dataset.galleryQueued = "1";
+        galleryLoadQueue.push({ img: img, url: url });
+        galleryPumpLoad();
+      }
+
+      if ("IntersectionObserver" in window) {
+        var galleryIo = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting && entry.target.getAttribute("data-src")) {
+                galleryEnqueue(entry.target);
+                galleryIo.unobserve(entry.target);
+              }
+            });
+          },
+          { root: null, rootMargin: "120px 0px 140px 0px", threshold: 0.01 }
+        );
+        galleryImages.forEach(function (img) {
+          if (img.getAttribute("data-src")) {
+            galleryIo.observe(img);
+          }
+        });
+      } else {
+        galleryImages.forEach(function (img) {
+          galleryEnqueue(img);
+        });
+      }
+
+      function closeLightbox() {
+        if (!lightbox) {
+          return;
+        }
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+      }
+
+      function openLightbox(src, alt) {
+        if (!lightbox || !lightboxImg || !src) {
+          return;
+        }
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || "Ảnh cưới xem toàn màn hình";
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+      }
+
+      galleryImages.forEach(function (img) {
+        img.style.cursor = "zoom-in";
+        img.addEventListener("click", function () {
+          var url = galleryImgUrl(img);
+          if (!url) {
+            return;
+          }
+          openLightbox(url, img.alt);
+        });
+      });
+
+      if (lightboxClose) {
+        lightboxClose.addEventListener("click", closeLightbox);
+      }
+      if (lightbox) {
+        lightbox.addEventListener("click", function (evt) {
+          if (evt.target === lightbox) {
+            closeLightbox();
+          }
+        });
+      }
+      document.addEventListener("keydown", function (evt) {
+        if (evt.key === "Escape") {
+          closeLightbox();
+        }
+      });
     })();
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
